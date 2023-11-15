@@ -1,0 +1,23 @@
+﻿@model Worker
+
+<div class="text-center">
+    <h1 class="display-4">ברוך הבא, @Model.FirstName @Model.LastName</h1>
+
+    <div class="mt-4">
+        @if (!Model.Shifts.Any() || !DateTime.Equals(Model.Shifts.Last().ExitTime, default(DateTime)))
+        {
+            
+                <!-- Show Entry button if no shifts or last shift has an exit time -->
+                    <form asp-action="RecordEntery" asp-route-workerId="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-success">כניסה</button>
+                </form>
+        }
+        else
+        {
+                <!-- Show Exit button if there is an active shift -->
+                    <form asp-action="RecordExit" asp-route-workerId="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-danger">יציאה</button>
+                </form>
+        }
+    </div>
+</div>

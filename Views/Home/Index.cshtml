@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@*@model Worker
+*@
+
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">ברוך הבא</h1>
+    <h2>הכנס את פרטיך</h2>
+
+    <form asp-controller="Workers" asp-action="WorkerDetails" method="post">
+        <div class="form-group">
+            <label for="firstName">שם פרטי:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">שם משפחה:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
 </div>
