@@ -1,0 +1,22 @@
+﻿<div class="text-center">
+    <h1 class="display-4">יצירת דוח עובד</h1>
+
+    <form asp-action="ReportWorker" method="post">
+        <div class="form-group">
+            <label for="firstName">שם פרטי</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">שם משפחה</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="selectedDate">בחר חודש ושנה</label>
+            <input type="month" class="form-control" id="selectedDate" name="selectedDate" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">צור דוח</button>
+    </form>
+</div>
