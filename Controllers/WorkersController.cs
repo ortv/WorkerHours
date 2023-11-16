@@ -115,7 +115,7 @@ namespace WorkerHours.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PricePerHour")] Worker worker)
+        public async Task<IActionResult> Create([Bind("Id,WorkerId,FirstName,LastName,PricePerHour")] Worker worker)
         {
             if (ModelState.IsValid)
             {
@@ -147,7 +147,7 @@ namespace WorkerHours.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PricePerHour")] Worker worker)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,WorkerId,FirstName,LastName,PricePerHour")] Worker worker)
         {
             if (id != worker.Id)
             {
@@ -174,6 +174,8 @@ namespace WorkerHours.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
             return View(worker);
         }
 
