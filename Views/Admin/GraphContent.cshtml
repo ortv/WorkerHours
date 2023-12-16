@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "GraphContent";
+}
+
+<p>בחר את סוג הגרף שברצונך לראות</p>
+
+<ul>
+    <li>
+        <label>
+            <input type="radio" name="graphType" value="paymentForAll" checked />
+            פירוט תשלומי עובדים לפי שנה
+        </label>
+        <form id="paymentForAllForm" asp-action="PaymentForAllGraph" asp-controller="Admin" method="get">
+            <label for="year">שנה:</label>
+            <input type="text" id="year" name="year" placeholder="YYYY" pattern="[0-9]{4}" required />
+            <button type="submit">הצג גרף</button>
+        </form>
+    </li>
+    <li>
+        <label>
+            <input type="radio" name="graphType" value="workerGraph" />
+            פירוט שעות עובד לפי חודש
+        </label>
+        <form id="workerGraphForm" asp-action="WorkerGraph" asp-controller="Admin" method="get">
+            <label for="workerId">Worker ID:</label>
+            <input type="text" id="workerId" name="workerId" pattern="[0-9]+" required />
+            <label for="month">חודש:</label>
+            <input type="text" id="month" name="month" placeholder="MM/YYYY" pattern="(0[1-9]|1[0-2])/(19|20)\d{2}" required />
+            <button type="submit">הצג גרף</button>
+        </form>
+    </li>
+</ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Hide all forms initially
+        document.getElementById('workerGraphForm').style.display = 'none';
+
+        // Add change event listener to toggle forms based on selected option
+        var radioButtons = document.getElementsByName('graphType');
+        radioButtons.forEach(function (radioButton) {
+            radioButton.addEventListener('change', function () {
+                if (this.value === 'paymentForAll') {
+                    document.getElementById('paymentForAllForm').style.display = 'block';
+                    document.getElementById('workerGraphForm').style.display = 'none';
+                } else if (this.value === 'workerGraph') {
+                    document.getElementById('workerGraphForm').style.display = 'block';
+                    document.getElementById('paymentForAllForm').style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

@@ -27,6 +27,10 @@ namespace WorkerHours.Controllers
                           View(await _context.Worker.ToListAsync()) :
                           Problem("Entity set 'WorkerHoursContext.Worker'  is null.");
         }
+        public async Task<IActionResult> showWorkers(List<Worker>workers)
+        {
+            return View(workers);
+        }
 
         public async Task<IActionResult> WorkerDetails(string firstName, string lastName)
         {

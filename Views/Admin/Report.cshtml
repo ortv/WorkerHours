@@ -1,7 +1,7 @@
 ﻿<div class="text-center">
     <h1 class="display-4">יצירת דוח עובד</h1>
 
-    <form asp-action="ReportWorker" method="post">
+    <form asp-controller="Salaries" asp-action="ReportWorker" method="post">
         <div class="form-group">
             <label for="firstName">שם פרטי</label>
             <input type="text" class="form-control" id="firstName" name="firstName" required>

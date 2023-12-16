@@ -1,0 +1,64 @@
+﻿@*@model WorkerGraphViewModel
+
+@{
+    ViewData["Title"] = "Worker Graph";
+}
+
+<h1>Worker Graph</h1>
+
+<h3>Worker: @ViewBag.WorkerName</h3>
+<h4>Month: @ViewBag.Month, Year: @ViewBag.Year</h4>*@
+
+<canvas id="workerGraph"></canvas>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var hoursData = @Html.Raw(Json.Serialize(Model.HoursForTheDay));
+        var salariesData = @Html.Raw(Json.Serialize(Model.SalaryForTheDay));
+
+        var ctx = document.getElementById('workerGraph').getContext('2d');
+        var workerGraph = new Chart(ctx, {
+            type: 'line', // Use a line chart
+            data: {
+                labels: Array.from({ length: hoursData.length }, (_, i) => i + 1), // Assuming labels are days of the month
+                datasets: [
+                    {
+                        label: 'Hours',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        data: hoursData
+                    },
+                    {
+                        label: 'Salary',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        data: salariesData
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: '@Model.XAxisLabel'
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: '@Model.YAxisLabel'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

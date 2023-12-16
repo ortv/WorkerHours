@@ -15,5 +15,7 @@ namespace WorkerHours.Data
         }
 
         public DbSet<WorkerHours.Models.Worker> Worker { get; set; } = default!;
+
+        public DbSet<WorkerHours.Models.Salary>? Salary { get; set; }
     }
 }

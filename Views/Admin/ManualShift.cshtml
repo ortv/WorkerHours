@@ -1,0 +1,35 @@
+﻿@page
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>הקלדה ידנית למשמרת</title>
+</head>
+<body>
+
+    <h2>הקלדה ידנית למשמרת</h2>
+    @if (!string.IsNullOrEmpty(@ViewBag.Message))
+    {
+        <div class="alert alert-success">
+            @ViewBag.Message
+        </div>
+    }
+    <form method="post" asp-action="ManualShift" asp-controller="Admin">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="timeEnter">Time Enter:</label>
+        <input type="time" id="timeEnter" name="timeEnter" required>
+
+        <label for="timeExit">Time Exit:</label>
+        <input type="time" id="timeExit" name="timeExit" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

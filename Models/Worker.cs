@@ -18,7 +18,7 @@ namespace WorkerHours.Models
         public double PricePerHour { get; set; }
         [Display(Name = "משמרות")]
         public List<Shift>? Shifts { get; set; }//all the shifts of worker over time
-        public List<Salary>? Salaries { get; set; }//saves all the salries of worker ever the month
+        public List<Salary>? Salaries { get; set; }//saves all the salries of worker over the month
 
     }
 }
