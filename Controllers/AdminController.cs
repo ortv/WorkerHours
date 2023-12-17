@@ -180,6 +180,33 @@ namespace WorkerHours.Controllers
 
             return View("~/Views/Workers/showWorkers.cshtml", working);
         }
+        //if the worker forot to submit an exit- the admin has the option to fix it
+        public IActionResult ForgotExit(string id,DateTime exit)
+        {
+            var worker = _context.Worker
+             .Include(w => w.Shifts)
+             .FirstOrDefault(w => w.WorkerId == id);
+
+            if (id != null && worker == null)//worker not found
+            {
+                ViewBag.Message = "Error:worker doesnt exist";
+                return View();
+            }
+            if (id == null)//dont have input yet
+            {
+                return View();
+            }
+            if (worker.Shifts.Count()==0||!DateTime.Equals(worker.Shifts.Last().ExitTime, default(DateTime)))//there is already an exit or doesnt have shifts a all(not even an enterce)
+            {
+                ViewBag.Message = "Error:exit already exists";
+                return View();
+            }
+            worker.Shifts.Last().ExitTime = exit;//updates the lat shift(we know that he did an enterce) to the actual exit time
+            _context.SaveChanges();
+            ViewBag.Message = "exit updated successfully.";
+            return View();
+
+        }
 
     }
 }
