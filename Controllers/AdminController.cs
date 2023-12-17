@@ -167,15 +167,19 @@ namespace WorkerHours.Controllers
         {
             var actualTime = DateTime.Now;//gets the actual time and date
                                           //takes only the worker that there last shift is from today and they havnt exit yet
-            var working = _context.Worker
-                .Include(w => w.Shifts)
-                .Include(w => w.Salaries)
-                .Where(w => w.Shifts.Any() &&
-                DateTime.Equals(w.Shifts.OrderByDescending(s => s.DayDate).First().DayDate, actualTime) &&
-                DateTime.Equals(w.Shifts.OrderByDescending(s => s.DayDate).First().ExitTime, null)).ToList();
+            var wo = _context.Worker.Include(w => w.Shifts)
+                .Include(w => w.Salaries).ToList();
+            var working=wo.Where(w => w.Shifts.Any() && DateTime.Equals(w.Shifts.Last().DayDate, actualTime.Date) &&
+                DateTime.Equals(w.Shifts.Last().ExitTime, default(DateTime))).ToList();
+            //var working = _context.Worker
+            //    .Include(w => w.Shifts)
+            //    .Include(w => w.Salaries)
+            //    .Where(w => w.Shifts.Any() &&
+            //    DateTime.Equals(w.Shifts.OrderByDescending(s => s.DayDate).First().DayDate, actualTime.Date) &&
+            //    DateTime.Equals(w.Shifts.OrderByDescending(s => s.DayDate).First().ExitTime, default(DateTime))).ToList();
 
-            return RedirectToAction("showWorkers", "Workers", new {working});
+            return View("~/Views/Workers/showWorkers.cshtml", working);
         }
-        
+
     }
 }
