@@ -10,7 +10,11 @@
 <h4>Month: @ViewBag.Month, Year: @ViewBag.Year</h4>*@
 
 <canvas id="workerGraph"></canvas>
-
+<div>
+    <p>
+        <a asp-action="Index" asp-controller="Admin">Back to List</a>
+    </p>
+</div>
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

@@ -2,7 +2,9 @@
 
 <div class="text-center">
     <h1 class="display-4">ברוך הבא, @Model.FirstName @Model.LastName</h1>
-
+    <p>
+        <a asp-action="Index" asp-controller="Admin">Back to List</a>
+    </p>
     <div class="mt-4">
         @if (!Model.Shifts.Any() || !DateTime.Equals(Model.Shifts.Last().ExitTime, default(DateTime)))
         {

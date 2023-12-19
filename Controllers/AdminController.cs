@@ -198,7 +198,7 @@ namespace WorkerHours.Controllers
             }
             if (worker.Shifts.Count()==0||!DateTime.Equals(worker.Shifts.Last().ExitTime, default(DateTime)))//there is already an exit or doesnt have shifts a all(not even an enterce)
             {
-                ViewBag.Message = "Error:exit already exists";
+                ViewBag.Message = "Error:exit already exists or dont have shifts";
                 return View();
             }
             worker.Shifts.Last().ExitTime = exit;//updates the lat shift(we know that he did an enterce) to the actual exit time

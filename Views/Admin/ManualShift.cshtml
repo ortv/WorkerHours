@@ -9,6 +9,9 @@
 <body>
 
     <h2>הקלדה ידנית למשמרת</h2>
+    <p>
+        <a asp-action="Index" asp-controller="Admin">Back to List</a>
+    </p>
     @if (!string.IsNullOrEmpty(@ViewBag.Message))
     {
         <div class="alert alert-success">
